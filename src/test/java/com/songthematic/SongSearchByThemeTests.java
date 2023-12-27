@@ -11,7 +11,7 @@ public class SongSearchByThemeTests {
 
     @Test
     void searchForThemeThatDoesNotExistReturnsNoResults() {
-        SongSearcher songSearcher = new SongSearcher();
+        SongSearcher songSearcher = new SongSearcher("New Years", "auld lang syne");
 
         List<String> foundSongs = songSearcher.byTheme("AppleSauce");
 
@@ -21,7 +21,7 @@ public class SongSearchByThemeTests {
 
     @Test
     void searchForThemeFindsOneMatchingSong() {
-        SongSearcher songSearcher = new SongSearcher();
+        SongSearcher songSearcher = new SongSearcher("New Years", "auld lang syne");
 
         List<String> foundSong = songSearcher.byTheme("New Years");
 
