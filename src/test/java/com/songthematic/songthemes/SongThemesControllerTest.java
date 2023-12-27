@@ -1,20 +1,32 @@
 package com.songthematic.songthemes;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.ui.ConcurrentModel;
+import org.springframework.ui.Model;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class SongThemesControllerTest {
 
     @Test
-    void getSearchReturnsSearchResultsView() {
-        SongThemesController songThemesController = new SongThemesController();
+    void searchReturnsSearchResultsView() {
+        SongThemesController songThemesController = new SongThemesController(new SongSearcher());
+        Model model = new ConcurrentModel();
 
-        String viewName = songThemesController.themeSearch();
+        String viewName = songThemesController.themeSearch(model);
 
         assertThat(viewName)
                 .isEqualTo("theme-search-results");
     }
 
+    @Test
+    void searchReturnsModelWithNoSongsFoundAttribute() {
+        SongThemesController songThemesController = new SongThemesController(new SongSearcher());
+        Model model = new ConcurrentModel();
+
+        songThemesController.themeSearch(model);
+
+        assertThat(model.getAttribute("emptySearchResults"))
+                .isEqualTo(Boolean.TRUE);
+    }
 }
