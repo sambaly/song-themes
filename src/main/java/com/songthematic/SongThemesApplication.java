@@ -14,6 +14,6 @@ public class SongThemesApplication {
 
 	@Bean
 	public SongSearcher songSearcher() {
-		return new SongSearcher("New Years", "auld lang syne");
+		return SongSearcher.createSongSearcher("New Years", "auld lang syne");
 	}
 }
