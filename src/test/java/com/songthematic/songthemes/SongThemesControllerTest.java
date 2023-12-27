@@ -8,12 +8,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class SongThemesControllerTest {
 
     @Test
-    void postSearchRedirectsToSearchResults() {
+    void getSearchReturnsSearchResultsView() {
         SongThemesController songThemesController = new SongThemesController();
 
-        String redirectPage = songThemesController.themeSearch();
+        String viewName = songThemesController.themeSearch();
 
-        assertThat(redirectPage)
-                .isEqualTo("redirect:/theme-search-results");
+        assertThat(viewName)
+                .isEqualTo("theme-search-results");
     }
+
 }
