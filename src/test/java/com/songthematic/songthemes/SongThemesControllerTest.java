@@ -24,8 +24,7 @@ class SongThemesControllerTest {
     void searchReturnsModelWithEmptySearchResults() {
         String theme = "New Years";
         String songTitle = "auld lang syne";
-        SongThemesController songThemesController = new SongThemesController(
-                SongSearcher.createSongSearcher(theme, songTitle));
+        SongThemesController songThemesController = createSongThemesController(theme, songTitle);
         Model model = new ConcurrentModel();
 
         songThemesController.themeSearch("christmas", model);
@@ -38,13 +37,16 @@ class SongThemesControllerTest {
     void searchReturnsModelWithNonEmptySearchResults() {
         String theme = "New Years";
         String songTitle = "auld lang syne";
-        SongThemesController songThemesController = new SongThemesController(
-                SongSearcher.createSongSearcher(theme, songTitle));
+        SongThemesController songThemesController = createSongThemesController(theme, songTitle);
         Model model = new ConcurrentModel();
 
         songThemesController.themeSearch("New Years", model);
 
         assertThat(model.getAttribute("emptySearchResults"))
                 .isEqualTo(Boolean.FALSE);
+    }
+
+    private static SongThemesController createSongThemesController(String theme, String songTitle) {
+        return new SongThemesController(SongSearcher.createSongSearcher(theme, songTitle));
     }
 }
