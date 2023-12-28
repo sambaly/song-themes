@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
+import static java.util.Collections.emptyList;
+
 @Controller
 public class SongThemesController {
 
@@ -17,10 +19,15 @@ public class SongThemesController {
         this.songSearcher = songSearcher;
     }
 
-    @GetMapping ("/theme-search")
+    @GetMapping("/theme-search")
     public String themeSearch(String requestedTheme, Model model) {
         List<String> foundSongs = songSearcher.byTheme(requestedTheme);
+        List<SongView> songViews = foundSongs
+                .stream()
+                .map(SongView::new)
+                .toList();
         model.addAttribute("emptySearchResults", foundSongs.isEmpty());
+        model.addAttribute("searchResults", songViews);
         return "theme-search-results";
     }
 }

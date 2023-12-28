@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.ui.ConcurrentModel;
 import org.springframework.ui.Model;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class SongThemesControllerTest {
@@ -41,9 +43,13 @@ class SongThemesControllerTest {
         Model model = new ConcurrentModel();
 
         songThemesController.themeSearch("New Years", model);
+        List<SongView> searchResults = (List<SongView>) model.getAttribute("searchResults");
 
         assertThat(model.getAttribute("emptySearchResults"))
                 .isEqualTo(Boolean.FALSE);
+        assertThat(searchResults)
+                .containsExactly(new SongView("auld lang syne"));
+            
     }
 
     private static SongThemesController createSongThemesController(String theme, String songTitle) {
