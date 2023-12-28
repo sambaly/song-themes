@@ -13,7 +13,7 @@ class SongThemesControllerTest {
         SongThemesController songThemesController = new SongThemesController(SongSearcher.withOneSong());
         Model model = new ConcurrentModel();
 
-        String viewName = songThemesController.themeSearch(model);
+        String viewName = songThemesController.themeSearch("", model);
 
         assertThat(viewName)
                 .isEqualTo("theme-search-results");
@@ -21,14 +21,30 @@ class SongThemesControllerTest {
 
 
     @Test
-    void searchReturnsModelWithNoSongsFoundAttribute() {
-        SongThemesController songThemesController = new SongThemesController(SongSearcher.withOneSong());
+    void searchReturnsModelWithEmptySearchResults() {
+        String theme = "New Years";
+        String songTitle = "auld lang syne";
+        SongThemesController songThemesController = new SongThemesController(
+                SongSearcher.createSongSearcher(theme, songTitle));
         Model model = new ConcurrentModel();
 
-        songThemesController.themeSearch(model);
+        songThemesController.themeSearch("christmas", model);
 
         assertThat(model.getAttribute("emptySearchResults"))
                 .isEqualTo(Boolean.TRUE);
     }
 
+    @Test
+    void searchReturnsModelWithNonEmptySearchResults() {
+        String theme = "New Years";
+        String songTitle = "auld lang syne";
+        SongThemesController songThemesController = new SongThemesController(
+                SongSearcher.createSongSearcher(theme, songTitle));
+        Model model = new ConcurrentModel();
+
+        songThemesController.themeSearch("New Years", model);
+
+        assertThat(model.getAttribute("emptySearchResults"))
+                .isEqualTo(Boolean.FALSE);
+    }
 }
