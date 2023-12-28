@@ -1,5 +1,6 @@
 package com.songthematic;
 
+import com.songthematic.songthemes.Song;
 import com.songthematic.songthemes.SongSearcher;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +22,7 @@ public class SongSearchByThemeTests {
 
     @Test
     void searchForThemeFindsOneMatchingSong() {
-        SongSearcher songSearcher = SongSearcher.createSongSearcher("New Years", "auld lang syne");
+        SongSearcher songSearcher = SongSearcher.createSongSearcher(new Song("New Years", "auld lang syne"));
 
         List<String> foundSong = songSearcher.byTheme("New Years");
 

@@ -1,5 +1,6 @@
 package com.songthematic;
 
+import com.songthematic.songthemes.Song;
 import com.songthematic.songthemes.SongSearcher;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,6 +15,6 @@ public class SongThemesApplication {
 
 	@Bean
 	public SongSearcher songSearcher() {
-		return SongSearcher.createSongSearcher("New Years", "auld lang syne");
+		return SongSearcher.createSongSearcher(new Song("New Years", "auld lang syne"));
 	}
 }
