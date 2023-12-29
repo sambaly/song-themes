@@ -32,7 +32,7 @@ public class SongSearchByThemeTests {
             "New Years, New Years",
             "New Years, new years",
     })
-    void searchForThemeFindsOneMatchingSong(String songTheme, String requestedTheme) {
+    void searchForThemeFindsOneMatchingSongIgnoringCase(String songTheme, String requestedTheme) {
         SongSearcher songSearcher = SongSearcher.createSongSearcher(new Song(songTheme, "auld lang syne"));
 
         List<String> foundSong = songSearcher.byTheme(requestedTheme);
