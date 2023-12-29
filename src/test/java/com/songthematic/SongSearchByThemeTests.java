@@ -42,7 +42,6 @@ public class SongSearchByThemeTests {
     }
 
     @Test
-    @Disabled
     void searchForThemeFindsMultipleMatchingSongs() {
         SongSearcher songSearcher = SongSearcher.createSongSearcher(
                 new Song("New Years", "auld lang syne"),
