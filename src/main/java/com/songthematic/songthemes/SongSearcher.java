@@ -7,8 +7,21 @@ public class SongSearcher {
     private final Map<String, List<Song>> themeToSongsMap = new HashMap<>();
 
     private SongSearcher(Song... songs) {
-        // assuming all incoming songs are of same theme
-        themeToSongsMap.put(songs[0].theme().toLowerCase(), Arrays.asList(songs));
+        for (Song song : songs) {
+            List<Song> songList;
+
+            if (themeToSongsMap.containsKey(song.theme().toLowerCase())) {
+                String normalizedTheme = song.theme().toLowerCase();
+                songList = themeToSongsMap.get(normalizedTheme);
+            } else {
+                songList = new ArrayList<>();
+            }
+            songList.add(song);
+            themeToSongsMap.put(song.theme().toLowerCase(), songList);
+
+        }
+        // TRY #2 Later putIfAbsent
+        // TRY #3 Collectors groupingBy
     }
 
     public static SongSearcher createSongSearcher(Song... songs) {
