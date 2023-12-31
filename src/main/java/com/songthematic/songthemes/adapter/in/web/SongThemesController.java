@@ -28,6 +28,10 @@ public class SongThemesController {
                 .toList();
         model.addAttribute("emptySearchResults", foundSongs.isEmpty());
         model.addAttribute("searchResults", songViews);
-        return "theme-search-results";
+        if (foundSongs.isEmpty()) {
+            return "theme-search-no-results";
+        } else {
+            return "theme-search-has-results";
+        }
     }
 }
