@@ -37,7 +37,6 @@ class SongThemesControllerTest {
     }
 
     @Test
-    @Disabled
     void searchReturnsModelWithNonEmptySearchResults() {
         String theme = "New Years";
         SongThemesController songThemesController = createSongThemesController(new Song(theme, "auld lang syne"),
@@ -56,6 +55,6 @@ class SongThemesControllerTest {
     }
 
     private static SongThemesController createSongThemesController(Song... songs) {
-        return new SongThemesController(SongSearcher.createSongSearcher(songs[0]));
+        return new SongThemesController(SongSearcher.createSongSearcher(songs));
     }
 }
