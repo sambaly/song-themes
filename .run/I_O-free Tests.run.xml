@@ -3,7 +3,7 @@
     <module name="song-themes" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="com.songthematic.*" />
+        <option name="PATTERN" value="com.songthematic.domain.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>

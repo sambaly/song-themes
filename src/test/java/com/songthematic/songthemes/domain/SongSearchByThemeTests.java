@@ -1,13 +1,8 @@
-package com.songthematic;
+package com.songthematic.songthemes.domain;
 
-import com.songthematic.songthemes.Song;
-import com.songthematic.songthemes.SongSearcher;
-import com.songthematic.songthemes.SongView;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 

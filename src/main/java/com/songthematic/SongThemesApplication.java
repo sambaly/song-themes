@@ -1,7 +1,7 @@
 package com.songthematic;
 
-import com.songthematic.songthemes.Song;
-import com.songthematic.songthemes.SongSearcher;
+import com.songthematic.songthemes.domain.Song;
+import com.songthematic.songthemes.domain.SongSearcher;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
