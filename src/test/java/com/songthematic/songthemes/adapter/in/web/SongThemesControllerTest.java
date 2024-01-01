@@ -12,19 +12,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class SongThemesControllerTest {
 
-    @Test
-    void searchReturnsMatchingSearchResultsView() {
-        String theme = "New Years";
-        Song song = new Song(theme, "irrelevant song title");
-        SongThemesController songThemesController = new SongThemesController(SongSearcher.createSongSearcher(song));
-        Model model = new ConcurrentModel();
-
-        String viewName = songThemesController.themeSearch(theme, model);
-
-        assertThat(viewName)
-                .isEqualTo("theme-search-has-results");
-    }
-
 
     @Test
     void searchReturnsModelWithEmptySearchResults() {
@@ -35,8 +22,6 @@ class SongThemesControllerTest {
 
         String viewName = songThemesController.themeSearch("christmas", model);
 
-        assertThat(model.getAttribute("emptySearchResults"))
-                .isEqualTo(Boolean.TRUE);
         assertThat(viewName)
                 .isEqualTo("theme-search-no-results");
     }
@@ -48,11 +33,12 @@ class SongThemesControllerTest {
                 new Song(theme, "New Year's Eve In A Haunted House"));
         Model model = new ConcurrentModel();
 
-        songThemesController.themeSearch("New Years", model);
+        String viewName = songThemesController.themeSearch("New Years", model);
         List<SongView> searchResults = (List<SongView>) model.getAttribute("searchResults");
 
-        assertThat(model.getAttribute("emptySearchResults"))
-                .isEqualTo(Boolean.FALSE);
+        assertThat(viewName)
+                .isEqualTo("theme-search-has-results");
+
         assertThat(searchResults)
                 .containsExactly(new SongView("auld lang syne"),
                         new SongView("New Year's Eve In A Haunted House"));
