@@ -14,7 +14,7 @@ public class SongSearchByThemeTests {
     void searchForThemeThatDoesNotExistReturnsNoResults() {
         SongSearcher songSearcher = SongSearcher.withOneSongForTheme("New Years");
 
-        List<String> foundSongs = songSearcher.byTheme("AppleSauce");
+        List<String> foundSongs = songSearcher.songTitlesByTheme("AppleSauce");
 
         assertThat(foundSongs)
                 .isEmpty();
@@ -30,7 +30,7 @@ public class SongSearchByThemeTests {
     void searchForThemeFindsOneMatchingSongIgnoringCase(String songTheme, String requestedTheme) {
         SongSearcher songSearcher = SongSearcher.createSongSearcher(new Song(songTheme, "auld lang syne"));
 
-        List<String> foundSong = songSearcher.byTheme(requestedTheme);
+        List<String> foundSong = songSearcher.songTitlesByTheme(requestedTheme);
 
         assertThat(foundSong)
                 .containsExactly("auld lang syne");
@@ -42,7 +42,7 @@ public class SongSearchByThemeTests {
                 new Song("New Years", "auld lang syne"),
                 new Song("New years", "New Year's Eve In A Haunted House"));
 
-        List<String> foundSongs = songSearcher.byTheme("New Years");
+        List<String> foundSongs = songSearcher.songTitlesByTheme("New Years");
 
         assertThat(foundSongs)
                 .containsExactly("auld lang syne", "New Year's Eve In A Haunted House");
@@ -55,10 +55,10 @@ public class SongSearchByThemeTests {
                 new Song("New Years", "auld lang syne"),
                 new Song("christmas", "The Christmas Tree is on Fire"));
 
-        assertThat(songSearcher.byTheme("New Years"))
+        assertThat(songSearcher.songTitlesByTheme("New Years"))
                 .containsExactly("auld lang syne");
 
-        assertThat(songSearcher.byTheme("Christmas"))
+        assertThat(songSearcher.songTitlesByTheme("Christmas"))
                 .containsExactly("The Christmas Tree is on Fire");
     }
 }

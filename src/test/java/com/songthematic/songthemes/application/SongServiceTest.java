@@ -18,4 +18,17 @@ class SongServiceTest {
         assertThat(songsFound)
                 .isEmpty();
     }
+
+    @Test
+    void oneSongAddedIsFoundByItsTheme() {
+        SongService songService = new SongService();
+
+        songService.addSong(new Song("new years", "This Will Be Our Year"));
+
+        List<Song> songsFound = songService.searchByTheme("new years");
+
+        assertThat(songsFound)
+                .containsExactly(new Song("new years", "This Will Be Our Year"));
+
+    }
 }
