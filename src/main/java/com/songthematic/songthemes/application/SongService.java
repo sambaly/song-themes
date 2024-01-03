@@ -18,6 +18,6 @@ public class SongService {
     }
 
     public void addSong(Song song) {
-        songSearcher = SongSearcher.createSongSearcher(song);
+        songSearcher = songSearcher.add(song);
     }
 }
