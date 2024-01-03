@@ -31,15 +31,9 @@ public class SongSearcher {
                 .stream()
                 .map(Song::title)
                 .toList();
-
     }
 
     public List<Song> byTheme(String requestedTheme) {
-        List<Song> matchingSongs = themeToSongsMap.get(requestedTheme.toLowerCase());
-
-        if (matchingSongs == null) {
-            matchingSongs =  Collections.emptyList();
-        }
-        return matchingSongs;
+        return themeToSongsMap.getOrDefault(requestedTheme.toLowerCase(), Collections.emptyList());
     }
 }
