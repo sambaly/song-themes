@@ -21,6 +21,10 @@ public class SongSearcher {
         return new SongSearcher(songs);
     }
 
+    public static SongSearcher createSongSearcher(List<Song> songs) {
+        return new SongSearcher(songs.toArray(Song[]::new));
+    }
+
     public static SongSearcher withOneSongForTheme(String theme) {
         return new SongSearcher(new Song(theme, "Song with theme " + theme));
     }
