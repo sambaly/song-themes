@@ -1,7 +1,6 @@
 package com.songthematic.songthemes.application;
 
 import com.songthematic.songthemes.domain.Song;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -29,9 +28,11 @@ class SongServiceTest {
 
     @Test
     void savedSongsLoadedOnStartup() {
-        List<Song> songRepository = new ArrayList<>();
-        songRepository.add(new Song("Fire", "Baby's on Fire"));
+        List<Song> songList = new ArrayList<>();
+        songList.add(new Song("Fire", "Baby's on Fire"));
 
+        SongRepository songRepository = new SongRepository();
+        songRepository.setSongRepository(songList);
         SongService songService = new SongService(songRepository);
 
         assertThat(songService.searchByTheme("Fire"))
@@ -39,15 +40,16 @@ class SongServiceTest {
     }
 
     @Test
-    @Disabled
     void addedSongsAreSavedToRepository() {
-        List<Song> songRepository = new ArrayList<>();
-        songRepository.add(new Song("Fire", "Baby's on Fire"));
+        List<Song> songList = new ArrayList<>();
+        songList.add(new Song("Fire", "Baby's on Fire"));
+        SongRepository songRepository = new SongRepository();
+        songRepository.setSongRepository(songList);
         SongService songService = new SongService(songRepository);
 
         songService.addSong(new Song("Fire", "Smokestack Lightning"));
 
-        assertThat(songRepository)
+        assertThat(songRepository.getSongRepository())
                 .hasSize(2);
     }
 }
