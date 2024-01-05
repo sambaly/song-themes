@@ -17,7 +17,7 @@ public class SongService {
     }
 
     public SongService(SongRepository songRepository) {
-        songSearcher = SongSearcher.createSongSearcher(songRepository.getSongRepository());
+        songSearcher = SongSearcher.createSongSearcher(songRepository.allSongs());
         this.songRepository = songRepository;
     }
 
@@ -26,7 +26,8 @@ public class SongService {
     }
 
     public void addSong(Song song) {
-        songRepository.getSongRepository().add(song);
+        songRepository.add(song);
         songSearcher = songSearcher.add(song);
     }
+
 }
