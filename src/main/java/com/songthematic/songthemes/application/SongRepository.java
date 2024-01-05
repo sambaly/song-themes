@@ -9,6 +9,12 @@ public class SongRepository {
 
     public SongRepository() {}
 
+    static SongRepository create(List<Song> songList) {
+        SongRepository songRepository = new SongRepository();
+        songRepository.setSongRepository(songList);
+        return songRepository;
+    }
+
     public List<Song> getSongRepository() {
         return songRepository;
     }
