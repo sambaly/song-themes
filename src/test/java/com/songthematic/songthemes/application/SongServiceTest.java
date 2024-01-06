@@ -26,6 +26,12 @@ class SongServiceTest {
                 );
     }
 
+    /*@Test
+    void songWithMultipleThemesIsFoundByAnyOfThoseThemes() {
+        SongService songService = new SongService();
+        songService.addSong(new Song(List.of("Christmas", "Halloween"), "Nightmare Before Christmas"));
+    }*/
+
     @Test
     void savedSongsLoadedOnStartup() {
         List<Song> songList = new ArrayList<>();

@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 public class SongRepository {
     private final List<Song> songs;
 
-    public SongRepository(List<Song> songs) {
+    private SongRepository(List<Song> songs) {
         this.songs = songs;
     }
 
