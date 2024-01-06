@@ -12,7 +12,7 @@ public class SongSearcher {
         themeToSongsMap.putAll(
                 Arrays.stream(songs)
                         .collect(
-                                Collectors.groupingBy(song -> song.theme().toLowerCase())
+                                Collectors.groupingBy(song -> song.theme().stream().findFirst().get().toLowerCase())
                         )
         );
     }
