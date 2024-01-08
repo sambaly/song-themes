@@ -19,9 +19,12 @@ public class SongSearcher {
         Map<String, List<Song>> map = new HashMap<>();
         songStream.forEach(
                 song -> {
-                    List<Song> songs = map.getOrDefault(song.theme().stream().findFirst().get().toLowerCase(), new ArrayList<>());
-                    songs.add(song);
-                    map.put(song.theme().stream().findFirst().get().toLowerCase(), songs);
+                    for (String theme : song.theme()) {
+                        String normalizedTheme = theme.toLowerCase();
+                        List<Song> songs = map.getOrDefault(normalizedTheme, new ArrayList<>());
+                        songs.add(song);
+                        map.put(normalizedTheme, songs);
+                    }
                 }
         );
         return map;

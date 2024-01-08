@@ -12,7 +12,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class SongThemesControllerTest {
 
-
     @Test
     void searchReturnsModelWithEmptySearchResults() {
         String theme = "New Years";
