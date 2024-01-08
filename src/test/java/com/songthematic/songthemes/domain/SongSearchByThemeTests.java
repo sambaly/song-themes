@@ -61,4 +61,15 @@ public class SongSearchByThemeTests {
         assertThat(songSearcher.songTitlesByTheme("Christmas"))
                 .containsExactly("The Christmas Tree is on Fire");
     }
+
+    @Test
+    void songWithMultipleThemesIsFoundByItsSecondTheme() {
+        SongSearcher songSearcher = SongSearcher.createSongSearcher(new Song(List.of("Christmas", "Halloween"), "Nightmare Before Christmas"));
+
+        List<Song> songsFound = songSearcher.byTheme("halloween");
+
+        assertThat(songsFound)
+                .extracting(Song::title)
+                .containsExactly("Nightmare Before Christmas");
+    }
 }

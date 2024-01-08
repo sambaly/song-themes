@@ -27,18 +27,6 @@ class SongServiceTest {
     }
 
     @Test
-    void songWithMultipleThemesIsFoundByItsSecondTheme() {
-        SongService songService = new SongService();
-        songService.addSong(new Song(List.of("Christmas", "Halloween"), "Nightmare Before Christmas"));
-
-        List<Song> songsFound = songService.searchByTheme("halloween");
-
-        assertThat(songsFound)
-                .extracting(Song::title)
-                .containsExactly("Nightmare Before Christmas");
-    }
-
-    @Test
     void savedSongsLoadedOnStartup() {
         List<Song> songList = new ArrayList<>();
         songList.add(new Song("Fire", "Baby's on Fire"));
