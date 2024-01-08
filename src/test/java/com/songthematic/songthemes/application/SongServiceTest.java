@@ -14,40 +14,44 @@ class SongServiceTest {
     void multipleSongsAddedAreFoundByTheirTheme() {
         SongService songService = new SongService();
 
-        songService.addSong(new Song("new years", "This Will Be Our Year"));
-        songService.addSong(new Song("new years", "Funky New Year"));
+        songService.addSong(createSong("This Will Be Our Year", "new years"));
+        songService.addSong(createSong("Funky New Year", "new years"));
 
         List<Song> songsFound = songService.searchByTheme("new years");
 
         assertThat(songsFound)
                 .containsExactly(
-                        new Song("new years", "This Will Be Our Year"),
-                        new Song("new years", "Funky New Year")
+                        createSong("This Will Be Our Year", "new years"),
+                        createSong("Funky New Year", "new years")
                 );
     }
 
     @Test
     void savedSongsLoadedOnStartup() {
         List<Song> songList = new ArrayList<>();
-        songList.add(new Song("Fire", "Baby's on Fire"));
+        songList.add(createSong("Baby's on Fire", "Fire"));
 
         SongRepository songRepository = SongRepository.create(songList);
         SongService songService = new SongService(songRepository);
 
         assertThat(songService.searchByTheme("Fire"))
-                .containsExactly(new Song("Fire", "Baby's on Fire"));
+                .containsExactly(createSong("Baby's on Fire", "Fire"));
     }
 
     @Test
     void addedSongsAreSavedToRepository() {
         List<Song> songList = new ArrayList<>();
-        songList.add(new Song("Fire", "Baby's on Fire"));
+        songList.add(createSong("Baby's on Fire", "Fire"));
         SongRepository songRepository = SongRepository.create(songList);
         SongService songService = new SongService(songRepository);
 
-        songService.addSong(new Song("Fire", "Smokestack Lightning"));
+        songService.addSong(createSong("Smokestack Lightning", "Fire"));
 
         assertThat(songRepository.allSongs())
                 .hasSize(2);
+    }
+
+    private static Song createSong(String title, String theme) {
+        return new Song(title, List.of(theme));
     }
 }

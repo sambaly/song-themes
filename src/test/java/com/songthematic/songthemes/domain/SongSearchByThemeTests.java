@@ -28,7 +28,7 @@ public class SongSearchByThemeTests {
             "New Years, new years",
     })
     void searchForThemeFindsOneMatchingSongIgnoringCase(String songTheme, String requestedTheme) {
-        SongSearcher songSearcher = SongSearcher.createSongSearcher(new Song(songTheme, "auld lang syne"));
+        SongSearcher songSearcher = SongSearcher.createSongSearcher(new Song("auld lang syne", List.of(songTheme)));
 
         List<String> foundSong = songSearcher.songTitlesByTheme(requestedTheme);
 
@@ -39,8 +39,8 @@ public class SongSearchByThemeTests {
     @Test
     void searchForThemeFindsMultipleMatchingSongs() {
         SongSearcher songSearcher = SongSearcher.createSongSearcher(
-                new Song("New Years", "auld lang syne"),
-                new Song("New years", "New Year's Eve In A Haunted House"));
+                new Song("auld lang syne", List.of("New Years")),
+                new Song("New Year's Eve In A Haunted House", List.of("New years")));
 
         List<String> foundSongs = songSearcher.songTitlesByTheme("New Years");
 
@@ -52,8 +52,8 @@ public class SongSearchByThemeTests {
     @Test
     void forSongsWithDifferentThemesSearchFindsAllSongs() {
         SongSearcher songSearcher = SongSearcher.createSongSearcher(
-                new Song("New Years", "auld lang syne"),
-                new Song("christmas", "The Christmas Tree is on Fire"));
+                new Song("auld lang syne", List.of("New Years")),
+                new Song("The Christmas Tree is on Fire", List.of("christmas")));
 
         assertThat(songSearcher.songTitlesByTheme("New Years"))
                 .containsExactly("auld lang syne");
