@@ -1,7 +1,6 @@
 package com.songthematic.songthemes.domain;
 
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class SongSearcher {
@@ -9,12 +8,23 @@ public class SongSearcher {
     private final Map<String, List<Song>> themeToSongsMap = new HashMap<>();
 
     private SongSearcher(Song... songs) {
+        Stream<Song> songStream = Arrays.stream(songs);
+
         themeToSongsMap.putAll(
-                Arrays.stream(songs)
-                        .collect(
-                                Collectors.groupingBy(song -> song.theme().stream().findFirst().get().toLowerCase())
-                        )
+                indexSongsByTheme(songStream)
         );
+    }
+
+    private static Map<String, List<Song>> indexSongsByTheme(Stream<Song> songStream) {
+        Map<String, List<Song>> map = new HashMap<>();
+        songStream.forEach(
+                song -> {
+                    List<Song> songs = map.getOrDefault(song.theme().stream().findFirst().get().toLowerCase(), new ArrayList<>());
+                    songs.add(song);
+                    map.put(song.theme().stream().findFirst().get().toLowerCase(), songs);
+                }
+        );
+        return map;
     }
 
     public static SongSearcher createSongSearcher(Song... songs) {

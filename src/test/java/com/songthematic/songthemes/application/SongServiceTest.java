@@ -1,6 +1,7 @@
 package com.songthematic.songthemes.application;
 
 import com.songthematic.songthemes.domain.Song;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -26,11 +27,18 @@ class SongServiceTest {
                 );
     }
 
-    /*@Test
-    void songWithMultipleThemesIsFoundByAnyOfThoseThemes() {
+    @Test
+    @Disabled
+    void songWithMultipleThemesIsFoundByItsSecondTheme() {
         SongService songService = new SongService();
         songService.addSong(new Song(List.of("Christmas", "Halloween"), "Nightmare Before Christmas"));
-    }*/
+
+        List<Song> songsFound = songService.searchByTheme("halloween");
+
+        assertThat(songsFound)
+                .extracting(Song::title)
+                .containsExactly("Nightmare Before Christmas");
+    }
 
     @Test
     void savedSongsLoadedOnStartup() {
