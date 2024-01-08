@@ -1,6 +1,7 @@
 package com.songthematic.songthemes.domain;
 
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 public class SongSearcher {
@@ -17,17 +18,19 @@ public class SongSearcher {
 
     private static Map<String, List<Song>> indexSongsByTheme(Stream<Song> songStream) {
         Map<String, List<Song>> map = new HashMap<>();
-        songStream.forEach(
-                song -> {
-                    for (String theme : song.theme()) {
-                        String normalizedTheme = theme.toLowerCase();
-                        List<Song> songs = map.getOrDefault(normalizedTheme, new ArrayList<>());
-                        songs.add(song);
-                        map.put(normalizedTheme, songs);
-                    }
-                }
-        );
+        songStream.forEach(indexSongByThemes(map));
         return map;
+    }
+
+    private static Consumer<Song> indexSongByThemes(Map<String, List<Song>> map) {
+        return song -> {
+            for (String theme : song.themes()) {
+                String normalizedTheme = theme.toLowerCase();
+                List<Song> songs = map.getOrDefault(normalizedTheme, new ArrayList<>());
+                songs.add(song);
+                map.put(normalizedTheme, songs);
+            }
+        };
     }
 
     public static SongSearcher createSongSearcher(Song... songs) {
@@ -39,7 +42,7 @@ public class SongSearcher {
     }
 
     public static SongSearcher withOneSongForTheme(String theme) {
-        return new SongSearcher(new Song(theme, "Song with theme " + theme));
+        return new SongSearcher(new Song(theme, "Song with themes " + theme));
     }
 
     public List<String> songTitlesByTheme(String requestedTheme) {
