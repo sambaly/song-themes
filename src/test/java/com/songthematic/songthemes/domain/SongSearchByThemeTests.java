@@ -64,7 +64,7 @@ public class SongSearchByThemeTests {
 
     @Test
     void songWithMultipleThemesIsFoundByItsSecondTheme() {
-        SongSearcher songSearcher = SongSearcher.createSongSearcher(new Song(List.of("Christmas", "Halloween"), "Nightmare Before Christmas"));
+        SongSearcher songSearcher = SongSearcher.createSongSearcher(new Song("Nightmare Before Christmas", List.of("Christmas", "Halloween")));
 
         List<Song> songsFound = songSearcher.byTheme("halloween");
 
