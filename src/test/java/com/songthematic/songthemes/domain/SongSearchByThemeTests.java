@@ -1,5 +1,6 @@
 package com.songthematic.songthemes.domain;
 
+import com.songthematic.songthemes.application.SongFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -28,7 +29,7 @@ public class SongSearchByThemeTests {
             "New Years, new years",
     })
     void searchForThemeFindsOneMatchingSongIgnoringCase(String songTheme, String requestedTheme) {
-        SongSearcher songSearcher = SongSearcher.createSongSearcher(new Song("auld lang syne", List.of(songTheme)));
+        SongSearcher songSearcher = SongSearcher.createSongSearcher(SongFactory.createSong("auld lang syne", songTheme));
 
         List<String> foundSong = songSearcher.songTitlesByTheme(requestedTheme);
 
@@ -39,8 +40,8 @@ public class SongSearchByThemeTests {
     @Test
     void searchForThemeFindsMultipleMatchingSongs() {
         SongSearcher songSearcher = SongSearcher.createSongSearcher(
-                new Song("auld lang syne", List.of("New Years")),
-                new Song("New Year's Eve In A Haunted House", List.of("New years")));
+                SongFactory.createSong("auld lang syne", "New Years"),
+                SongFactory.createSong("New Year's Eve In A Haunted House", "New years"));
 
         List<String> foundSongs = songSearcher.songTitlesByTheme("New Years");
 
@@ -52,8 +53,8 @@ public class SongSearchByThemeTests {
     @Test
     void forSongsWithDifferentThemesSearchFindsAllSongs() {
         SongSearcher songSearcher = SongSearcher.createSongSearcher(
-                new Song("auld lang syne", List.of("New Years")),
-                new Song("The Christmas Tree is on Fire", List.of("christmas")));
+                SongFactory.createSong("auld lang syne", "New Years"),
+                SongFactory.createSong("The Christmas Tree is on Fire", "christmas"));
 
         assertThat(songSearcher.songTitlesByTheme("New Years"))
                 .containsExactly("auld lang syne");
