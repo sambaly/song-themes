@@ -65,7 +65,7 @@ public class SongSearchByThemeTests {
 
     @Test
     void songWithMultipleThemesIsFoundByItsSecondTheme() {
-        SongSearcher songSearcher = SongSearcher.createSongSearcher(new Song("Nightmare Before Christmas", List.of("Christmas", "Halloween")));
+        SongSearcher songSearcher = SongSearcher.createSongSearcher(SongFactory.createSong("Nightmare Before Christmas", List.of("Christmas", "Halloween")));
 
         List<Song> songsFound = songSearcher.byTheme("halloween");
 
@@ -73,4 +73,5 @@ public class SongSearchByThemeTests {
                 .extracting(Song::title)
                 .containsExactly("Nightmare Before Christmas");
     }
+
 }

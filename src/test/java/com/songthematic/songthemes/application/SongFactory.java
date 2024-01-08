@@ -6,6 +6,10 @@ import java.util.List;
 
 public class SongFactory {
     public static Song createSong(String title, String theme) {
-        return new Song(title, List.of(theme));
+        return createSong(title, List.of(theme));
+    }
+
+    public static Song createSong(String title, List<String> themes) {
+        return new Song(title, themes);
     }
 }
