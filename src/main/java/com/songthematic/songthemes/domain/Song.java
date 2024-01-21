@@ -2,5 +2,5 @@ package com.songthematic.songthemes.domain;
 
 import java.util.List;
 
-public record Song(String title, List<String> themes) {
+public record Song(String songTitle, List<String> themes) {
 }

@@ -50,7 +50,7 @@ public class SongSearcher {
 
         return matchingSongs
                 .stream()
-                .map(Song::title)
+                .map(Song::songTitle)
                 .toList();
     }
 

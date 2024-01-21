@@ -70,7 +70,7 @@ public class SongSearchByThemeTests {
         List<Song> songsFound = songSearcher.byTheme("halloween");
 
         assertThat(songsFound)
-                .extracting(Song::title)
+                .extracting(Song::songTitle)
                 .containsExactly("Nightmare Before Christmas");
     }
 

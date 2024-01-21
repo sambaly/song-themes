@@ -52,7 +52,7 @@ class SongServiceTest {
     }
 
     @Test
-    void bulkAddSongsusingCsvFormat() {
+    void bulkAddSongUsingCsvFormat() {
         String row = "\"Artist\",\"SongTitle\",\"ReleaseTitle\",\"ReleaseType\",\"Theme\"";
         SongRepository songRepository = SongRepository.createEmpty();
         SongService songService = new SongService(songRepository);
@@ -60,7 +60,7 @@ class SongServiceTest {
         songService.importSongs(row);
 
         assertThat(songRepository.allSongs())
-                .containsExactly(SongFactory.createSong("SongTitle", "Theme"));
+                .containsExactly(SongFactory.createSong("Artist", "SongTitle", "ReleaseTitle", "ReleaseType", "Theme"));
     }
 
 }
