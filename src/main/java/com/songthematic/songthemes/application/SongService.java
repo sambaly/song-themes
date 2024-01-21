@@ -30,4 +30,7 @@ public class SongService {
         songSearcher = songSearcher.add(song);
     }
 
+    public void importSongs(String csvSongs) {
+        // List<Song> songs = magicMethod(csvSongs);
+    }
 }

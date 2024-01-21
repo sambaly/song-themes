@@ -1,6 +1,7 @@
 package com.songthematic.songthemes.application;
 
 import com.songthematic.songthemes.domain.Song;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -49,6 +50,19 @@ class SongServiceTest {
 
         assertThat(songRepository.allSongs())
                 .hasSize(2);
+    }
+
+    @Test
+    @Disabled
+    void bulkAddSongsusingCsvFormat() {
+        String row = "\"Artist\",\"SongTitle\",\"ReleaseTitle\",\"ReleaseType\",\"Theme\"";
+        SongRepository songRepository = SongRepository.createEmpty();
+        SongService songService = new SongService(songRepository);
+
+        songService.importSongs(row);
+
+        assertThat(songRepository.allSongs())
+                .containsExactly(SongFactory.createSong("SongTitle", "Theme"));
     }
 
 }
