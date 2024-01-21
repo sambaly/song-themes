@@ -2,5 +2,9 @@ package com.songthematic.songthemes.domain;
 
 import java.util.List;
 
-public record Song(String songTitle, List<String> themes) {
+public record Song(String artist,
+                   String songTitle,
+                   String releaseTitle,
+                   String releaseType,
+                   List<String> themes) {
 }

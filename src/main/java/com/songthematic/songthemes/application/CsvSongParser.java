@@ -12,7 +12,7 @@ public class CsvSongParser {
         CSVParser csvParser = new CSVParser();
         try {
             String[] columns = csvParser.parseLine(csvSongs);
-            Song song = new Song(columns[1], List.of(columns[4]));
+            Song song = new Song("", "", "", columns[1], List.of(columns[4]));
             return List.of(song);
         } catch (IOException e) {
             return Collections.emptyList();

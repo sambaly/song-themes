@@ -42,7 +42,7 @@ public class SongSearcher {
     }
 
     public static SongSearcher withOneSongForTheme(String theme) {
-        return new SongSearcher(new Song("Song with themes " + theme, List.of(theme)));
+        return new SongSearcher(new Song("artist", "songTitle", "releaseTitle", "Song with themes " + theme, List.of(theme)));
     }
 
     public List<String> songTitlesByTheme(String requestedTheme) {

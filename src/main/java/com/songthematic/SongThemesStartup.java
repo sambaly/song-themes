@@ -18,7 +18,7 @@ public class SongThemesStartup {
 	@Bean
 	public SongSearcher songSearcher() {
 		String theme = "new years";
-		return SongSearcher.createSongSearcher(new Song("auld lang syne", List.of(theme)),
-				new Song("New Year's Eve In A Haunted House", List.of(theme)));
+		return SongSearcher.createSongSearcher(new Song("artist", "songTitle", "releaseTitle", "auld lang syne", List.of(theme)),
+				new Song("artist", "songTitle", "releaseTitle", "New Year's Eve In A Haunted House", List.of(theme)));
 	}
 }

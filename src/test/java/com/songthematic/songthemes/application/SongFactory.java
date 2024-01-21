@@ -10,7 +10,7 @@ public class SongFactory {
     }
 
     public static Song createSong(String songTitle, List<String> themes) {
-        return new Song(songTitle, themes);
+        return new Song("IrrelevantArtist", songTitle, "IrrelevantReleaseTitle", "IrrelevantReleaseType", themes);
     }
 
     public static Song createSong(String artist, String songTitle, String releaseTitle, String releaseType, String theme) {
